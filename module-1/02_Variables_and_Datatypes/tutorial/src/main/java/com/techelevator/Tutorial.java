@@ -19,7 +19,14 @@ public class Tutorial {
         // Step 2: Calculate the sales tax and tip
         /******************************************************************************/
 
+        final double SALES_TAX_PERCENT = 7.5;
+        double taxAmount;
+        taxAmount = SALES_TAX_PERCENT / 100.0 * costOfDinner;
 
+        double tipAmount = tipPercent / 100.0 * costOfDinner;
+
+        System.out.println("Tax: $" + taxAmount);
+        System.out.println("Tip: $" + tipAmount);
 
 
 
@@ -28,7 +35,7 @@ public class Tutorial {
         // Step 3: Calculate the amount per person
         /******************************************************************************/
 
-
+        double amountPerPerson = (costOfDinner + taxAmount + tipAmount / numberOfGuests;
 
 
 
@@ -38,10 +45,10 @@ public class Tutorial {
         //      guest gets, and the number left over after each guest eats their pieces.
         /******************************************************************************/
 
-
-
-
-
+        int numberOfCookies = 9;
+        int numberCookiesPerGuest = numberOfCookies/numberOfGuests;
+        int leftoverPieces = numberOfCookies % numberOfCookies;
+        System.out.println("Each guest can eat " + numberCookiesPerGuest + " cookies, with " + leftoverPieces + " left over.");
 
 
         System.out.println("********************************************");
