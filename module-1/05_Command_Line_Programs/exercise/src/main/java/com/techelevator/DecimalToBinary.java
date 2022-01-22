@@ -33,8 +33,8 @@ public class DecimalToBinary {
         }
 
 
-        /*An idea that worked for odd numbers but not for even ones.
-        I looked up how to do log and power functions and spent way
+        /*My initial idea that worked for odd numbers but not for even ones because of the
+        extra zeroes on the end. I looked up how to do log and power functions and spent way
         too much time down this rabbit hole.
          */
 
