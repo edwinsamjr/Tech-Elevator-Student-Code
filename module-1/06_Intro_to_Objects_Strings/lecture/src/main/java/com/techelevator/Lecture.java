@@ -1,5 +1,9 @@
 package com.techelevator;
 
+import jdk.swing.interop.SwingInterOpUtils;
+
+import java.util.Locale;
+
 public class Lecture {
 
 	public static void main(String[] args) {
@@ -35,6 +39,40 @@ public class Lecture {
 		 * toUpperCase
 		 * trim
 		 */
+
+		String lectureString = "This is a string for Monday";
+		int length = lectureString.length();
+		System.out.println(length);
+
+		String firstFive = lectureString.substring(0,5);
+		System.out.println("firstFive = [" + firstFive + "]");
+
+		lectureString = lectureString.toUpperCase();
+		System.out.println(lectureString);
+
+		String concatStr = "Hello";
+		concatStr = concatStr + " Goodbye";
+		concatStr = concatStr + 5;
+		System.out.println(concatStr);
+		concatStr = " " + 5 + concatStr;
+
+		for (int i = 0; i < concatStr.length(); i++) {
+			System.out.println(concatStr.charAt(i));
+		}
+
+		int indexOfIs = lectureString.indexOf("IS");
+		System.out.println("indexOfIs = " + indexOfIs);
+		int indexOfSecondIs = lectureString.indexOf("IS", indexOfIs + 1);
+		System.out.println(indexOfSecondIs);
+
+		String sentence = "The quick brown dog said Hello";
+		System.out.println(sentence);
+
+		String upperSentence = sentence.toUpperCase();
+		boolean containsHello = sentence.toUpperCase().contains("HELLO");
+		System.out.println(containsHello);
+
+
 
 		System.out.println();
 		System.out.println("**********************");
