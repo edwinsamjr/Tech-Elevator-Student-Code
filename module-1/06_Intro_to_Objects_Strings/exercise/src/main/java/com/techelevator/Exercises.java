@@ -408,8 +408,6 @@ public class Exercises {
     public String stringX(String str) {
 
 
-
-
         if (str.length() < 3) {
             return str;
         } else {
@@ -425,30 +423,30 @@ public class Exercises {
      altPairs("Chocolate") → "Chole"
      altPairs("CodingHorror") → "Congrr"
      */
-        public String altPairs (String str){
-            String finalString = "";
-            if (str.length() == 1){
-                finalString += str.substring(0,1);
-            } else if (str.length() == 2 || str.length() == 3) {
-                finalString += str.substring(0,2);
-            } else if (str.length() % 4 == 1){
-                for (int i = 0; i < str.length() - 4; i+= 4) {
-                    finalString += str.substring(i, i + 2);
-                }
-                finalString += str.substring(str.length()-1);
-            } else if (str.length() % 4 == 2){
-                for (int i = 0; i < str.length() - 4; i+= 4) {
-                    finalString += str.substring(i, i + 2);
-                }
-                finalString += str.substring(str.length() - 2, str.length());
-            } else if (str.length() % 4 == 3 || str.length() % 4 == 0) {
-                for (int i = 0; i < str.length(); i+= 4) {
-                    finalString += str.substring(i, i + 2);
-                }
-
+    public String altPairs(String str) {
+        String finalString = "";
+        if (str.length() == 1) {
+            finalString += str.substring(0, 1);
+        } else if (str.length() == 2 || str.length() == 3) {
+            finalString += str.substring(0, 2);
+        } else if (str.length() % 4 == 1) {
+            for (int i = 0; i < str.length() - 4; i += 4) {
+                finalString += str.substring(i, i + 2);
             }
-            return finalString;
+            finalString += str.substring(str.length() - 1);
+        } else if (str.length() % 4 == 2) {
+            for (int i = 0; i < str.length() - 4; i += 4) {
+                finalString += str.substring(i, i + 2);
+            }
+            finalString += str.substring(str.length() - 2, str.length());
+        } else if (str.length() % 4 == 3 || str.length() % 4 == 0) {
+            for (int i = 0; i < str.length(); i += 4) {
+                finalString += str.substring(i, i + 2);
+            }
+
         }
+        return finalString;
+    }
 
     /*
      Suppose the string "yak" is unlucky. Given a string, return a version where all the "yak" are removed.
@@ -457,8 +455,8 @@ public class Exercises {
      stringYak("pakyak") → "pak"
      stringYak("yak123ya") → "123ya"
      */
-        public String stringYak (String str){
-            return str.replace("yak", "");
-        }
-
+    public String stringYak(String str) {
+        return str.replace("yak", "");
     }
+
+}
