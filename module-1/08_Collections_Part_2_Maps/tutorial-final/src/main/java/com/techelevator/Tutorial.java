@@ -27,6 +27,12 @@ public class Tutorial {
         for (Map.Entry<String, String> project : projects.entrySet()) {
             System.out.println("The key " + project.getKey() + " is linked to the value " + project.getValue());
         }
+
+        Map<String, Boolean> swJedis = new HashMap<>();
+        swJedis.put("Luke", true);
+
+        boolean isLandoJedi = swJedis.get("Lando");
+        System.out.println(isLandoJedi);
     }
 
 }
