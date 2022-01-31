@@ -4,7 +4,7 @@ public class BankAccount {
 
     private String accountHolderName;
     private String accountNumber;
-    private int balance;
+    public int balance;
 
     public BankAccount(String accountHolderName, String accountNumber) {
         this.accountHolderName = accountHolderName;
