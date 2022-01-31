@@ -110,13 +110,29 @@ public class Exercises {
      * robPeterToPayPaul({"Peter": 2000, "Paul": 30000}) → {"Peter": 2000, "Paul": 30000}
      *
      */
+//    public Map<String, Integer> robPeterToPayPaul(Map<String, Integer> peterPaul) {
+//        if ((peterPaul.get("Peter") > 0) && (peterPaul.get("Paul") < 1000) && (peterPaul.get("Peter") % 2 == 0)) {
+//            peterPaul.put("Paul", (peterPaul.get("Paul") + (peterPaul.get("Peter") / 2)));
+//            peterPaul.put("Peter", (peterPaul.get("Peter") / 2));
+//        } else if ((peterPaul.get("Peter") > 0) && (peterPaul.get("Paul") < 1000) && (peterPaul.get("Peter") % 2 == 1)) {
+//            peterPaul.put("Paul", (peterPaul.get("Paul") + (peterPaul.get("Peter") / 2)));
+//            peterPaul.put("Peter", (peterPaul.get("Peter") / 2) + 1);
+//        }
+//
+//        return peterPaul;
+//    }
+
     public Map<String, Integer> robPeterToPayPaul(Map<String, Integer> peterPaul) {
-        if ((peterPaul.get("Peter") > 0) && (peterPaul.get("Paul") < 1000) && (peterPaul.get("Peter") % 2 == 0)) {
-            peterPaul.put("Paul", (peterPaul.get("Paul") + (peterPaul.get("Peter") / 2)));
-            peterPaul.put("Peter", (peterPaul.get("Peter") / 2));
-        } else if ((peterPaul.get("Peter") > 0) && (peterPaul.get("Paul") < 1000) && (peterPaul.get("Peter") % 2 == 1)) {
-            peterPaul.put("Paul", (peterPaul.get("Paul") + (peterPaul.get("Peter") / 2)));
-            peterPaul.put("Peter", (peterPaul.get("Peter") / 2) + 1);
+        int peterMoney = peterPaul.get("Peter");
+        int paulMoney = peterPaul.get("Paul");
+        int amtToXfer = peterMoney / 2;
+
+        if ((peterMoney > 0) && paulMoney < 1000 && (peterMoney % 2 == 0)) {
+            peterPaul.put("Paul", (paulMoney + amtToXfer));
+            peterPaul.put("Peter", (amtToXfer));
+        } else if ((peterMoney > 0) && (paulMoney < 1000) && (peterMoney % 2 == 1)) {
+            peterPaul.put("Paul", (paulMoney + (amtToXfer)));
+            peterPaul.put("Peter", amtToXfer + 1);
         }
 
         return peterPaul;
