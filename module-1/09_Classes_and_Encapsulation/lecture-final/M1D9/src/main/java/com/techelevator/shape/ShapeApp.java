@@ -7,6 +7,7 @@ public class ShapeApp {
         Rectangle rect = new Rectangle();
 
         rect.setWidth(10);
+        rect.setWidth(-5);
         System.out.println(rect.getWidth());
 
         Rectangle rect2 = new Rectangle();

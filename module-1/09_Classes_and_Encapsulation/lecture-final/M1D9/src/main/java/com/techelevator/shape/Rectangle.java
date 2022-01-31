@@ -12,6 +12,7 @@ public class Rectangle {
     // Instance variables. Created for each instance of Rectangle
     private int width;
     private int height;
+    private String label;
 
     // Constructors
     public Rectangle() {
@@ -26,24 +27,32 @@ public class Rectangle {
         numInstances++;
     }
 
-    public void setWidth(int width) {
-        if (width >= 0) {
-            this.width = width;
-        }
+    public static int getNumInstances() {
+        return numInstances;
+    }
+
+    public static int getArea(int width, int height) {
+        return width * height;
     }
 
     public int getWidth() {
         return this.width;
     }
 
-    public void setHeight(int height) {
-        if (height >= 0) {
-            this.height = height;
+    public void setWidth(int width) {
+        if (width >= 0) {
+            this.width = width;
         }
     }
 
     public int getHeight() {
         return this.height;
+    }
+
+    public void setHeight(int height) {
+        if (height >= 0) {
+            this.height = height;
+        }
     }
 
     public int getArea() {
@@ -56,13 +65,5 @@ public class Rectangle {
 
     public boolean isSquare() {
         return this.width == this.height;
-    }
-
-    public static int getNumInstances() {
-        return numInstances;
-    }
-
-    public static int getArea(int width, int height) {
-        return width * height;
     }
 }
