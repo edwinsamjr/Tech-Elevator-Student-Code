@@ -13,4 +13,8 @@ public class Pig extends FarmAnimal implements Sellable {
     public BigDecimal getPrice() {
         return price;
     }
+
+    public String getFavoriteFood() {
+        return "Slop";
+    }
 }
