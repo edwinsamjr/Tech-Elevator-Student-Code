@@ -29,4 +29,12 @@ public class ReserveAuction extends Auction {
 
         return super.placeBid(reserveAuctionBid);
     }
+
+    public boolean placeWinningBid(String bidder) {
+        //Bid currentHighest = this.getHighBid();
+        //Bid currentHighest = super.getHighBid();
+        Bid currentHighest = getHighBid();
+
+        return placeBid(new Bid(bidder, currentHighest.getBidAmount() + 1));
+    }
 }
