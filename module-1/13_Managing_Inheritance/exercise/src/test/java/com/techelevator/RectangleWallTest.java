@@ -67,7 +67,7 @@ public class RectangleWallTest {
         try {
             Constructor<?> constructor = rectangle.getConstructor(String.class,String.class,int.class,int.class);
             Object sut = constructor.newInstance("TEST", "TESTCOLOR", 1, 3);
-            assertEquals("TEST (1X3) rectangle", sut.getClass().getMethod("toString").invoke(sut));
+            assertEquals("TEST (1x3) rectangle", sut.getClass().getMethod("toString").invoke(sut));
         } catch (NoSuchMethodException e) {
             fail(e.getMessage());
         }

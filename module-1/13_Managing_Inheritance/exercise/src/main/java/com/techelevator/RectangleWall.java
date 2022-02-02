@@ -25,6 +25,6 @@ public class RectangleWall extends Wall {
     }
 
     public String toString() {
-        return super.getName() + " (" + length + "X" + height + ") rectangle";
+        return super.getName() + " (" + length + "x" + height + ") rectangle";
     }
 }
