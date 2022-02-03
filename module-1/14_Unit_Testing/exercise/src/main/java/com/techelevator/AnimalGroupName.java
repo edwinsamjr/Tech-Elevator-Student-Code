@@ -20,6 +20,7 @@ public class AnimalGroupName {
         animals.put("crocodile", "Float");
     }
 
+
     /*
      * Given the name of an animal, return the name of a group of that animal
      * (e.g. "Elephant" -> "Herd", "Rhino" - "Crash").
@@ -59,5 +60,7 @@ public class AnimalGroupName {
         // this is an easier way of doing what we did above
         //return animals.getOrDefault(animalName.toLowerCase(),"unknown");
     }
+
+
 
 }

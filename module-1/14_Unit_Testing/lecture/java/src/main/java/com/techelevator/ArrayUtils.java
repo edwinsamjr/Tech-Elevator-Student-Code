@@ -2,9 +2,30 @@ package com.techelevator;
 
 public class ArrayUtils {
 
-    public static int max(int[] array) {
-        int maxFound = 0;
+//    public static int max(int[] array) {
+//        int maxFound = 0;
+//
+//        for (int i = 0; i < array.length; i++) {
+//            if (array[i] > maxFound) {
+//                maxFound = array[i];
+//            }
+//        }
+//
+//        return maxFound;
+//    }
 
+    /**
+     * Returns the maximum value from the given array.
+     * Returns Integer.MIN_VALUE if array is empty or null.
+     * @param array The array to scan
+     * @return the maximum value in array or Integer.MIN_VALUE
+     */
+    public static int max(int[] array) {
+        if (array == null){
+            return Integer.MIN_VALUE;
+        }
+
+        int maxFound = Integer.MIN_VALUE;
         for (int i = 0; i < array.length; i++) {
             if (array[i] > maxFound) {
                 maxFound = array[i];
@@ -23,5 +44,7 @@ public class ArrayUtils {
 
         return sum / array.length;
     }
+
+
 
 }
