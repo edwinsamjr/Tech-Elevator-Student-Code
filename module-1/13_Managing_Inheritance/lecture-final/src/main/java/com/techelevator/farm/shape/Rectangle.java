@@ -13,6 +13,7 @@ public class Rectangle extends Shape {
         this.width = width;
         this.height = height;
         this.instanceNum = Shape.getNumInstances();
+        logMessage("Constructed a new Rectangle");
     }
 
     public int getArea() {

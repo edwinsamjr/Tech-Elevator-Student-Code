@@ -6,6 +6,7 @@ public class OldMacdonald {
 	public static void main(String[] args) {
 
 		Rectangle rect = new Rectangle(10, 5);
+		//rect.logMessage("Hi Everybody!"); <-- Can't call protected method
 		//int numInst = rect... <!-- Can't access protected Shape method here
 
 		// FarmAnimal can't be instantiated (on the right side of new) now because it's abstract

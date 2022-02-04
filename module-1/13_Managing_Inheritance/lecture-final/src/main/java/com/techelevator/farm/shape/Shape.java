@@ -25,4 +25,8 @@ public abstract class Shape {
     protected static int getNumInstances() {
         return numInstances;
     }
+
+    protected void logMessage(String message) {
+        System.out.println(message);
+    }
 }
