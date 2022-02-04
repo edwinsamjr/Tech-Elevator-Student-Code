@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class WordCountTest {
 
+
     @Test
     public void array_four_multiletter_strings() {
         WordCount wordCount = new WordCount();

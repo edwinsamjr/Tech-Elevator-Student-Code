@@ -3,6 +3,8 @@ package com.techelevator;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.techelevator.BankAccount.printHelloWorld;
+
 public class BankCustomer {
 
     private String name;
@@ -20,6 +22,7 @@ public class BankCustomer {
         this.phoneNumber = phoneNumber;
         this.accounts = accounts;
     }
+
 
     public String getName() {
         return name;
@@ -73,5 +76,8 @@ public class BankCustomer {
 
     }
 
+    public static void main(String[] args) {
+        printHelloWorld();
+    }
 
 }

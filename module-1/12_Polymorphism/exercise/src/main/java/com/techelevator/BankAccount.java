@@ -48,4 +48,8 @@ public class BankAccount implements Accountable {
         return getBalance();
     }
 
+    public static void printHelloWorld() {
+        System.out.println("Hello World!!");
+    }
+
 }
