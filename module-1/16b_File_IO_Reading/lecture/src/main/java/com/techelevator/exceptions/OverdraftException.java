@@ -1,6 +1,6 @@
 package com.techelevator.exceptions;
 
-public class OverdraftException extends Exception {
+public class OverdraftException extends RuntimeException {
 
 	private double overdraftAmount = 0;
 	
