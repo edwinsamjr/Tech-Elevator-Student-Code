@@ -93,7 +93,7 @@ public class LectureTest {
 		double expected = 1.000001;
 		double actual =   1.0000011;
 		Assert.assertEquals(expected, actual, 0.01);
-		//Assert.assertEquals(expected, actual);
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
