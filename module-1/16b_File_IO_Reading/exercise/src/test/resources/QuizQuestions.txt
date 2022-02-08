@@ -1,0 +1,2 @@
+What color is the sky?|[1] Yellow|[2] Blue*|[3] Green|[4] Red
+What are Cleveland's odds of winning a championship?|[1] Not likely*|[2] Highly likely|[3] Fat chance|[4] Who cares??
