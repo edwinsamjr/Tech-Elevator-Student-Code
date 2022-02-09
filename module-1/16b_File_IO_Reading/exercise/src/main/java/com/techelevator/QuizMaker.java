@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class QuizMaker {
 
-	public static void main(String[] args) throws FileNotFoundException, IllegalArgumentException {
+	public static void main(String[] args) {
 
 		Scanner scanner = new Scanner(System.in);
 
@@ -16,11 +16,6 @@ public class QuizMaker {
 		String path = scanner.nextLine();
 		File inputFile = new File(path);
 
-//		if(!inputFile.exists()) {
-//			System.out.println(path + " does not exist");
-//		} else if (!inputFile.isFile()) {
-//			System.out.println(path + " is not a file");
-//		}
 
 		try (Scanner fileScanner = new Scanner(inputFile)) {
 

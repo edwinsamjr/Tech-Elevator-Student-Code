@@ -9,7 +9,7 @@ public class WordSearch {
 
 
 
-	public static void main(String[] args) throws FileNotFoundException, IllegalArgumentException {
+	public static void main(String[] args) {
 
 		Scanner scanner = new Scanner(System.in);
 
