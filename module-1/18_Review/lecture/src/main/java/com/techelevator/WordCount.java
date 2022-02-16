@@ -17,6 +17,7 @@ public class WordCount {
     public void run() {
         File inputFile = getFileFromUser();
 
+
         int numLines = 0;
         int numWords = 0;
 

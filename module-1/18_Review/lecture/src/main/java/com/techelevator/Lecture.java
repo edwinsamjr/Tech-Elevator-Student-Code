@@ -6,6 +6,7 @@ import java.util.Set;
 
 public class Lecture {
 
+String testString = "  123";
 
 
 
