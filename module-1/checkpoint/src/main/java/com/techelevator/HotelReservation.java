@@ -9,94 +9,108 @@ import java.util.Scanner;
 
 public class HotelReservation {
 
-	private String name;
-	private int numOfNights;
-	private BigDecimal estimatedTotal;
 
-	public HotelReservation(String name, int numOfNights) {
-		this.name = name;
-		this.numOfNights = numOfNights;
-		try {
-			this.estimatedTotal = new BigDecimal("59.99").multiply(new BigDecimal(numOfNights));
-			if (numOfNights < 1 || name == "" || name == null ) {
-				throw new IllegalArgumentException();
-			}
-		} catch (IllegalArgumentException e) {
-			System.out.println("Please enter a valid name & number of nights");
-			System.exit(12345);
-		}
-	}
+    private String name;
+    private int numOfNights;
+    private BigDecimal estimatedTotal;
 
-	public String getName() {
-		return name;
-	}
+    private static final BigDecimal MINI_BAR_FEE = new BigDecimal("12.99");
+    private static final BigDecimal CLEANING_FEE = new BigDecimal("34.99");
+    private static final BigDecimal FEE_FOR_BAR_AND_CLEANING = MINI_BAR_FEE.add(CLEANING_FEE.multiply(new BigDecimal("2")));
 
-	public int getNumOfNights() {
-		return numOfNights;
-	}
+    /**
+     *
+     * @param name
+     * @param numOfNights
+     * @throws IllegalArgumentException if name is empty or null or if numOfNights < 1
+     */
+    public HotelReservation(String name, int numOfNights) {
+        this.name = name;
+        this.numOfNights = numOfNights;
+        this.estimatedTotal = new BigDecimal("59.99").multiply(new BigDecimal(numOfNights));
+        if (numOfNights < 1 || name == "" || name == null) {
+            throw new IllegalArgumentException();
+        }
+    }
 
-	public BigDecimal getEstimatedTotal() {
-		return estimatedTotal;
-	}
 
-	public static void main(String[] args) {
+    public String getName() {
+        return name;
+    }
 
-		HotelReservation hotelReservation = new HotelReservation("Edwin", 1);
-		hotelReservation.addFees(true, true);
-		String result = hotelReservation.toString();
+    public int getNumOfNights() {
+        return numOfNights;
+    }
 
-		System.out.println(result);
+    public BigDecimal getEstimatedTotal() {
+        return estimatedTotal;
+    }
 
-		hotelReservation.calculateRevenue();
+    public static void main(String[] args) {
+        try {
+            HotelReservation hotelReservation = new HotelReservation("Edwin", 2);
+            System.out.println(hotelReservation.estimatedTotal);
+            hotelReservation.addFees(true, true);
+            hotelReservation.addFees(true, true);
+            String result = hotelReservation.toString();
 
-	}
+            System.out.println(result);
 
-	public  BigDecimal addFees(boolean usedMinibar, boolean requiresCleaning) {
-		BigDecimal miniBarFee = new BigDecimal("12.99");
-		BigDecimal cleaningFee = new BigDecimal("34.99");
-		BigDecimal feeForBarAndCleaning = miniBarFee.add(cleaningFee.multiply(new BigDecimal("2")));
-		if(requiresCleaning && usedMinibar) {
-			estimatedTotal = estimatedTotal.add(feeForBarAndCleaning);
-		} else if (requiresCleaning) {
-			estimatedTotal = estimatedTotal.add(cleaningFee);
-		} else if (usedMinibar) {
-			estimatedTotal = estimatedTotal.add(miniBarFee);
-		}
+            hotelReservation.calculateRevenue();
 
-		return estimatedTotal;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Please enter valid name and number of nights");
+        }
 
-	}
+    }
 
-	@Override
-	public String toString() {
-		String result = "RESERVATION - {" + name + "} - {" + estimatedTotal + "}";
-		return result;
+    public BigDecimal addFees(boolean usedMinibar, boolean requiresCleaning) {
 
-	}
+        if (estimatedTotal.compareTo(new BigDecimal("59.99").multiply(new BigDecimal(numOfNights))) < 1) {
 
-	//Adjusted the HotelInput CSV to take out spaces after commas in lines 2-5
-	public void calculateRevenue() {
-		List<HotelReservation> reservations = new ArrayList<>();
-		BigDecimal currentTotal = new BigDecimal("0.00");
+            if (requiresCleaning && usedMinibar) {
+                estimatedTotal = estimatedTotal.add(FEE_FOR_BAR_AND_CLEANING);
+            } else if (requiresCleaning) {
+                estimatedTotal = estimatedTotal.add(CLEANING_FEE);
+            } else if (usedMinibar) {
+                estimatedTotal = estimatedTotal.add(MINI_BAR_FEE);
+            }
+        }
 
-		try (Scanner scanner = new Scanner(new File ("C:\\Users\\Student\\workspace\\edwin-sam-jr-student-code\\module-1\\checkpoint\\data-files\\HotelInput.csv"))) {
-			while (scanner.hasNextLine()) {
-				String line = scanner.nextLine();
-				String[] splitLine = line.split(",");
-				String guestName = splitLine[0];
-				int guestNumOfNights = Integer.parseInt(splitLine[1]);
-				reservations.add(new HotelReservation(guestName, guestNumOfNights));
-			}
-		} catch (FileNotFoundException e) {
-			System.out.println("File not found");
-		}
+        return estimatedTotal;
 
-		for (HotelReservation reservation : reservations) {
-			currentTotal = currentTotal.add(reservation.getEstimatedTotal());
-		}
+    }
 
-		System.out.println(currentTotal);
+    @Override
+    public String toString() {
+        String result = "RESERVATION - {" + name + "} - {" + estimatedTotal + "}";
+        return result;
 
-	}
+    }
+
+    public void calculateRevenue() {
+        List<HotelReservation> reservations = new ArrayList<>();
+        BigDecimal currentTotal = new BigDecimal("0.00");
+
+        try (Scanner scanner = new Scanner(new File("C:\\Users\\Student\\workspace\\edwin-sam-jr-student-code\\module-1\\checkpoint\\data-files\\HotelInput.csv"))) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] splitLine = line.split(",");
+                String guestName = splitLine[0];
+                String numNightsTrimmed = splitLine[1].trim();
+                int guestNumOfNights = Integer.parseInt(numNightsTrimmed);
+                reservations.add(new HotelReservation(guestName, guestNumOfNights));
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+
+        for (HotelReservation reservation : reservations) {
+            currentTotal = currentTotal.add(reservation.getEstimatedTotal());
+        }
+
+        System.out.println(currentTotal);
+
+    }
 
 }

@@ -32,7 +32,7 @@ public class HotelReservationTest {
 
     /*Couldn't figure out syntax in time to get exception test to pass instead
     of just printing the exception message*/
-    @Test (expected = java.lang.IllegalArgumentException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void gives_exception_if_name_is_empty() {
         HotelReservation hotelReservation = new HotelReservation("", 1);
 
@@ -58,7 +58,7 @@ public class HotelReservationTest {
         HotelReservation hotelReservation = new HotelReservation("Edwin", 0);
 
         BigDecimal actualTotal =  hotelReservation.getEstimatedTotal();
-        BigDecimal expectedTotal = new BigDecimal("59.99");
+        BigDecimal expectedTotal = new BigDecimal("0.00");
 
         Assert.assertEquals("Did not give exception when number of nights is below 1",expectedTotal, actualTotal);
 
