@@ -1,43 +1,58 @@
 Bug 1
 -----
 Test that demonstrates problem:
+getTimesheetsByEmployeeId_returns_list_of_all_timesheets_for_employee
 
 Expected output:
+Size of list should be 2 for employeeId of 1
 
 Actual output:
+Size of list was 1
 
 How did you fix this bug?
-
+Change 'if (results.next())' to 'while (results.next())'
 
 Bug 2
 -----
 Test that demonstrates problem:
+getTimesheetsByProjectId
 
 Expected output:
+Size of list should be 3 for projectId of 1
 
 Actual output:
+Size of list was 2
 
 How did you fix this bug?
-
+Change 'WHERE employee_id = ?' to 'WHERE project_id = ?'
 
 Bug 3
 -----
 Test that demonstrates problem:
+updated_timesheet_has_expected_values_when_retrieved
 
 Expected output:
+Updated billable to true
 
 Actual output:
+Billable remained false when updated timesheet was retrieved
 
 How did you fix this bug?
+Changed 'SET employee_id = ?, project_id = ?, date_worked = ?, hours_worked = ?, description = ?'
+to 'SET employee_id = ?, project_id = ?, date_worked = ?, hours_worked = ?, billable = ?, description = ?'
 
 
 Bug 4
 -----
 Test that demonstrates problem:
+getBillableHours_returns_correct_total
 
 Expected output:
+0.0 for employeeId of 2 and projectId of 2 (billable = false)
 
 Actual output:
+2.0 for employeeId of 2 and projectId of 2 (billable = false)
 
 How did you fix this bug?
-
+Changed 'WHERE employee_id = ? AND project_id = ?'
+to 'WHERE employee_id = ? AND project_id = ? AND billable = true'

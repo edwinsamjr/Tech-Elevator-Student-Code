@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = TestingDatabaseConfig.class)
-public abstract class BaseDaoTests {
+public abstract class    BaseDaoTests {
 
     @Autowired
     protected DataSource dataSource;

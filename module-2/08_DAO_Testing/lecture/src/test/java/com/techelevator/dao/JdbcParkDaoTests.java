@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class JdbcParkDaoTests extends BaseDaoTests {
 
@@ -25,52 +26,93 @@ public class JdbcParkDaoTests extends BaseDaoTests {
 
     @Test
     public void getPark_returns_correct_park_for_id() {
-        Assert.fail();
+        Park park = sut.getPark(1);
+        assertParksMatch(PARK_1, park);
+
     }
 
     @Test
     public void getPark_returns_null_when_id_not_found() {
-        Assert.fail();
+        Park park = sut.getPark(99);
+        Assert.assertNull(park);
+
     }
 
     @Test
     public void getParksByState_returns_all_parks_for_state() {
-        Assert.fail();
+        List<Park> parks = sut.getParksByState("AA");
+        Assert.assertEquals(2, parks.size());
+
+        assertParksMatch(PARK_1, parks.get(0));
+        assertParksMatch(PARK_3, parks.get(1));
     }
 
     @Test
     public void getParksByState_returns_empty_list_for_abbreviation_not_in_db() {
-        Assert.fail();
+        List<Park> parks = sut.getParksByState("ZZ");
+        Assert.assertEquals(0, parks.size());
     }
 
     @Test
     public void createPark_returns_park_with_id_and_expected_values() {
-        Assert.fail();
+        Park expectedPark = new Park(0, "Oak Park", LocalDate.now(), 2, true);
+        Park actualPark = sut.createPark(expectedPark);
+        expectedPark.setParkId(actualPark.getParkId());
+
+
+        assertParksMatch(expectedPark, actualPark);
+
+
     }
 
     @Test
     public void created_park_has_expected_values_when_retrieved() {
-        Assert.fail();
+        Park createdPark = new Park(0, "Oak Park", LocalDate.now(), 2, true);
+        Park expectedPark = sut.createPark(createdPark);
+
+        Park actualPark = sut.getPark(createdPark.getParkId());
+
+        assertParksMatch(expectedPark, actualPark);
+
     }
 
     @Test
     public void updated_park_has_expected_values_when_retrieved() {
-        Assert.fail();
+        Park parkToUpdate = sut.getPark(1);
+        parkToUpdate.setParkName("French Park");
+        parkToUpdate.setDateEstablished(LocalDate.now());
+        parkToUpdate.setArea(200);
+        parkToUpdate.setHasCamping(true);
+
+        sut.updatePark(parkToUpdate);
+        Park retrievedPark = sut.getPark(1);
+
+        assertParksMatch(parkToUpdate, retrievedPark);
     }
 
     @Test
     public void deleted_park_cant_be_retrieved() {
-        Assert.fail();
+        sut.deletePark(2);
+        Park retrievedPark = sut.getPark(2);
+        Assert.assertNull(retrievedPark);
     }
 
     @Test
     public void park_added_to_state_is_in_list_of_parks_by_state() {
-        Assert.fail();
+        sut.addParkToState(1, "BB");
+        List<Park> parksInBB = sut.getParksByState("BB");
+
+        Assert.assertEquals(2, parksInBB.size());
+        assertParksMatch(parksInBB.get(0), PARK_1);
+
     }
 
     @Test
     public void park_removed_from_state_is_not_in_list_of_parks_by_state() {
-        Assert.fail();
+        sut.removeParkFromState(2, "BB");
+        List<Park> parksInBB = sut.getParksByState("BB");
+
+        Assert.assertEquals(0, parksInBB.size());
     }
 
     private void assertParksMatch(Park expected, Park actual) {
