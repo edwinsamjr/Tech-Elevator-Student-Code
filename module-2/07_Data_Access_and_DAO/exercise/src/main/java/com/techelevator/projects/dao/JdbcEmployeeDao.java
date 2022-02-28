@@ -25,26 +25,10 @@ public class JdbcEmployeeDao implements EmployeeDao {
 
         String sql = "SELECT employee_id, department_id, first_name, last_name, birth_date, hire_date" +
                 " FROM employee;";
-        SqlRowSet results = this.jdbcTemplate.queryForRowSet(sql);
+        SqlRowSet result = this.jdbcTemplate.queryForRowSet(sql);
 
-        while (results.next()) {
-            Date birthdate = results.getDate("birth_date");
-            Date hiredate = results.getDate("hire_date");
-
-            Employee employee = new Employee();
-
-            employee.setId(results.getLong("employee_id"));
-            employee.setDepartmentId(results.getLong("department_id"));
-            employee.setFirstName(results.getString("first_name"));
-            employee.setLastName(results.getString("last_name"));
-
-            if (birthdate != null) {
-                employee.setBirthDate(birthdate.toLocalDate());
-            }
-            if (hiredate != null) {
-                employee.setHireDate(hiredate.toLocalDate());
-            }
-
+        while (result.next()) {
+            Employee employee = mapRowToEmployee(result);
             employees.add(employee);
 
         }
@@ -62,23 +46,7 @@ public class JdbcEmployeeDao implements EmployeeDao {
         SqlRowSet result = this.jdbcTemplate.queryForRowSet(sql, "%" + firstNameSearch + "%", "%" + lastNameSearch + "%");
 
         while (result.next()) {
-            Date birthdate = result.getDate("birth_date");
-            Date hiredate = result.getDate("hire_date");
-
-            Employee employee = new Employee();
-
-            employee.setId(result.getLong("employee_id"));
-            employee.setDepartmentId(result.getLong("department_id"));
-            employee.setFirstName(result.getString("first_name"));
-            employee.setLastName(result.getString("last_name"));
-
-            if (birthdate != null) {
-                employee.setBirthDate(birthdate.toLocalDate());
-            }
-            if (hiredate != null) {
-                employee.setHireDate(hiredate.toLocalDate());
-            }
-
+            Employee employee = mapRowToEmployee(result);
             employees.add(employee);
 
         }
@@ -97,23 +65,7 @@ public class JdbcEmployeeDao implements EmployeeDao {
         SqlRowSet result = this.jdbcTemplate.queryForRowSet(sql, projectId);
 
         while (result.next()) {
-            Date birthdate = result.getDate("birth_date");
-            Date hiredate = result.getDate("hire_date");
-
-            Employee employee = new Employee();
-
-            employee.setId(result.getLong("employee_id"));
-            employee.setDepartmentId(result.getLong("department_id"));
-            employee.setFirstName(result.getString("first_name"));
-            employee.setLastName(result.getString("last_name"));
-
-            if (birthdate != null) {
-                employee.setBirthDate(birthdate.toLocalDate());
-            }
-            if (hiredate != null) {
-                employee.setHireDate(hiredate.toLocalDate());
-            }
-
+            Employee employee = mapRowToEmployee(result);
             employees.add(employee);
 
         }
@@ -143,22 +95,35 @@ public class JdbcEmployeeDao implements EmployeeDao {
 
     @Override
     public List<Employee> getEmployeesWithoutProjects() {
-        List<Employee> employees = new ArrayList<>();
-        List<Employee> allEmployees = getAllEmployees();
+            List<Employee> employees = new ArrayList<>();
 
-        for (Employee employee : allEmployees) {
-            String sql = "SELECT employee_id" +
-                    " FROM project_employee" +
-                    " WHERE employee_id = ?;";
+            String sql = "SELECT employee.employee_id, employee.department_id, employee.first_name, employee.last_name, employee.birth_date, employee.hire_date" +
+                         " FROM employee" +
+                            " LEFT JOIN project_employee ON project_employee.employee_id = employee.employee_id" +
+                            " WHERE employee.employee_id NOT IN (" +
+                                " SELECT project_employee.employee_id" +
+                                " FROM project_employee);";
 
-            SqlRowSet result = this.jdbcTemplate.queryForRowSet(sql, employee.getId());
+            SqlRowSet result = this.jdbcTemplate.queryForRowSet(sql);
 
-            if (!result.next()){
+            while (result.next()){
+                Employee employee = mapRowToEmployee(result);
                 employees.add(employee);
             }
-        }
 
         return employees;
+    }
+
+    private Employee mapRowToEmployee(SqlRowSet rowSet) {
+        Employee employee = new Employee();
+        employee.setId(rowSet.getLong("employee_id"));
+        employee.setDepartmentId(rowSet.getLong("department_id"));
+        employee.setFirstName(rowSet.getString("first_name"));
+        employee.setLastName(rowSet.getString("last_name"));
+        employee.setBirthDate(rowSet.getDate("birth_date").toLocalDate());
+        employee.setHireDate(rowSet.getDate("hire_date").toLocalDate());
+
+        return employee;
     }
 
 

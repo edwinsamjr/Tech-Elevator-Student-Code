@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
+import javax.swing.plaf.SliderUI;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -65,30 +66,7 @@ public class JdbcProjectDao implements ProjectDao {
 				" FROM project;";
 		SqlRowSet results = this.jdbcTemplate.queryForRowSet(sql);
 		while (results.next()) {
-			Project project = new Project();
-			Long projectId = results.getLong("project_id");
-			String projectName = results.getString("name");
-			Date startDate = results.getDate("from_date");
-			Date endDate = results.getDate("to_date");
-
-			if (projectId != null) {
-				project.setId(projectId);
-			}
-
-			if (projectName != null) {
-				project.setName(projectName);
-			}
-
-			if (startDate != null) {
-				LocalDate fromDate = startDate.toLocalDate();
-				project.setFromDate(fromDate);
-			}
-
-			if (endDate != null) {
-				LocalDate toDate = endDate.toLocalDate();
-				project.setToDate(toDate);
-			}
-
+			Project project = mapRowToProject(results);
 			projects.add(project);
 		}
 
@@ -105,8 +83,6 @@ public class JdbcProjectDao implements ProjectDao {
 				newProject.getToDate()
 				);
 
-
-
 		return this.getProject(projectId);
 	}
 
@@ -120,6 +96,22 @@ public class JdbcProjectDao implements ProjectDao {
 
 		this.jdbcTemplate.update(removeFromProjectEmployee, projectId);
 		this.jdbcTemplate.update(removeFromProject, projectId);
+	}
+
+	private Project mapRowToProject(SqlRowSet rowSet) {
+		Date startDate = rowSet.getDate("from_date");
+		Date endDate = rowSet.getDate("to_date");
+
+		Project project = new Project();
+		project.setId(rowSet.getLong("project_id"));
+		project.setName(rowSet.getString("name"));
+		if (startDate != null) {
+			project.setFromDate(rowSet.getDate("from_date").toLocalDate());
+		}
+		if (endDate != null) {
+			project.setToDate(rowSet.getDate("to_date").toLocalDate());
+		}
+		return project;
 	}
 	
 
