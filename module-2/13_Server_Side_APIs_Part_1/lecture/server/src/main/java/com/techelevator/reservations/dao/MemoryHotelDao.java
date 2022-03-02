@@ -79,5 +79,10 @@ public class MemoryHotelDao implements HotelDao {
                 new Address("1200 St Antoine St","","Detroit","Michigan","48226"),
                 4,
                 75,185));
+        hotels.add(new Hotel(8,
+                "Candy Inn",
+                new Address("100 Snickers Way","","Columbus","Michigan","48226"),
+                4,
+                75,185));
     }
 }
