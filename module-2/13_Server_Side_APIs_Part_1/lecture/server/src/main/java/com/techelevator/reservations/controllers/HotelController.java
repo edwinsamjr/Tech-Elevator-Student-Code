@@ -27,10 +27,10 @@ public class HotelController {
      *
      * @return a list of all hotels in the system
      */
-    @RequestMapping(path = "/hotels", method = RequestMethod.GET)
-    public List<Hotel> list() {
-        return hotelDao.list();
-    }
+//    @RequestMapping(path = "/hotels", method = RequestMethod.GET)
+//    public List<Hotel> list() {
+//        return hotelDao.list();
+//    }
 
     /**
      * Return hotel information
@@ -73,10 +73,11 @@ public class HotelController {
         this.reservationDao.create(newReservation, newReservation.getHotelID());
     }
 
-    @RequestMapping(path = "/hotels/", method = RequestMethod.GET)
-    public List<Hotel> list(
-            @RequestParam String state,
-            @RequestParam String city) {
+    @RequestMapping(path = "/hotels", method = RequestMethod.GET)
+    public List<Hotel> listByCityAndOrState(
+            @RequestParam(required = false) String state,
+            @RequestParam(required = false) String city) {
+
         List<Hotel> hotels = hotelDao.list();
 
         if (state == null && city == null) {
@@ -89,10 +90,48 @@ public class HotelController {
             String hotelState = hotel.getAddress().getState();
             if (hotelCity.equalsIgnoreCase(city) && hotelState.equalsIgnoreCase(state)) {
                 filteredList.add(hotel);
+            } else if (hotelCity.equalsIgnoreCase(city) && state == null) {
+                filteredList.add(hotel);
+            } else if (hotelState.equalsIgnoreCase(state) && city == null) {
+                filteredList.add(hotel);
             }
 
         }
         return filteredList;
 
     }
+
+//    @RequestMapping(path = "/hotels", method = RequestMethod.GET)
+//    public List<Hotel> listByCityAndOrState(
+//            @RequestParam(required = false) String state,
+//            @RequestParam(required = false) String city) {
+//
+//        List<Hotel> hotels = hotelDao.list();
+//
+//        boolean haveStateCriteria = state != null;
+//        boolean haveCityCriteria = city != null;
+//        if (!haveStateCriteria && !haveCityCriteria) {
+//            return hotels;
+//        }
+//
+//        // do our filtering
+//        List<Hotel> filteredList = new ArrayList<>();
+//        for(Hotel hotel : hotels) {
+//            String hotelCity = hotel.getAddress().getCity();
+//            String hotelState = hotel.getAddress().getState();
+//
+//            boolean cityMatches = hotelCity.equalsIgnoreCase(city);
+//            boolean stateMatches = hotelState.equalsIgnoreCase(state);
+//            if (cityMatches && stateMatches) {
+//                filteredList.add(hotel);
+//            } else if (cityMatches && !haveStateCriteria) {
+//                filteredList.add(hotel);
+//            } else if (stateMatches && !haveCityCriteria) {
+//                filteredList.add(hotel);
+//            }
+//
+//        }
+//
+//        return filteredList;
+//    }
 }

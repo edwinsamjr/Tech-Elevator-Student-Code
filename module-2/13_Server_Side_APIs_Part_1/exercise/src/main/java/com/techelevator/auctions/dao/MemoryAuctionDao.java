@@ -35,6 +35,22 @@ public class MemoryAuctionDao implements AuctionDao {
     public Auction create(Auction auction) {
         auction.setId(getMaxIdPlusOne());
         auctions.add(auction);
+
+//        boolean hasTitle = auction.getTitle() != null;
+//        boolean hasDescription = auction.getDescription() != null;
+//        boolean hasUser = auction.getUser() != null;
+//        boolean hasCurrentBid = auction.getCurrentBid() != 0.0;
+//
+//        boolean hasAllFields = (hasTitle && hasDescription && hasUser && hasCurrentBid);
+//
+//
+//        try {
+//            if (!hasAllFields) {
+//                throw new IllegalArgumentException();
+//            }
+//        } catch (IllegalArgumentException e) {
+//            System.out.println("Auction does not have all fields");
+//        }
         return auction;
     }
 
