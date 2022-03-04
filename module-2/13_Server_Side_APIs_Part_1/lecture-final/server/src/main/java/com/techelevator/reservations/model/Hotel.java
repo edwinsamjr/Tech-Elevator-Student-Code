@@ -1,5 +1,6 @@
 package com.techelevator.reservations.model;
 
+
 public class Hotel {
 
     private int id;

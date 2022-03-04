@@ -9,6 +9,7 @@ import com.techelevator.reservations.model.Reservation;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,7 +85,7 @@ public class HotelController {
      */
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/hotels/{id}/reservations", method = RequestMethod.POST)
-    public Reservation addReservation(@RequestBody Reservation reservation, @PathVariable("id") int hotelID)
+    public Reservation addReservation(@Valid @RequestBody Reservation reservation, @PathVariable("id") int hotelID)
             throws HotelNotFoundException {
         return reservationDao.create(reservation, hotelID);
     }
@@ -119,6 +120,19 @@ public class HotelController {
         }
 
         return filteredHotels;
+    }
+
+    @PutMapping (path = "/reservations/{id}")
+    public Reservation updateReservation(@Valid @RequestBody Reservation updatedReservation, @PathVariable int id)
+            throws ReservationNotFoundException {
+        return this.reservationDao.update(updatedReservation, id);
+
+    }
+    @ResponseStatus (HttpStatus.NO_CONTENT)
+    @DeleteMapping (path = "/reservations/{id}")
+    public void deleteReservation(@PathVariable int id)
+            throws ReservationNotFoundException{
+        this.reservationDao.delete(id);
     }
 
 }

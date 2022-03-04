@@ -10,4 +10,5 @@ public class LocationsApplication {
         SpringApplication.run(LocationsApplication.class, args);
     }
 
+
 }

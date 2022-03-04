@@ -3,6 +3,7 @@ package com.techelevator.locations.controllers;
 import com.techelevator.locations.dao.LocationDao;
 import com.techelevator.locations.exception.LocationNotFoundException;
 import com.techelevator.locations.model.Location;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class LocationController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public Location add(@RequestBody Location location) {
+    public Location add(@Valid @RequestBody Location location) {
         return dao.create(location);
     }
 
