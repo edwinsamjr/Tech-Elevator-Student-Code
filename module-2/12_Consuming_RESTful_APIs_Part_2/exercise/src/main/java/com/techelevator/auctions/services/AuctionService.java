@@ -19,9 +19,8 @@ public class AuctionService {
 
 
     public Auction add(Auction newAuction) {
-        final HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        final HttpEntity<Auction> content = new HttpEntity<>(newAuction, headers);
+        final HttpEntity<Auction> content = makeEntity(newAuction);
+
         try {
             Auction auction = this.restTemplate.postForObject(API_BASE_URL, content, Auction.class);
             return auction;
@@ -38,9 +37,7 @@ public class AuctionService {
 
     public boolean update(Auction updatedAuction) {
         String url = API_BASE_URL + updatedAuction.getId();
-        final HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        final HttpEntity<Auction> content = new HttpEntity<>(updatedAuction, headers);
+        final HttpEntity<Auction> content = makeEntity(updatedAuction);
         try {
             this.restTemplate.put(url, content);
             return true;
