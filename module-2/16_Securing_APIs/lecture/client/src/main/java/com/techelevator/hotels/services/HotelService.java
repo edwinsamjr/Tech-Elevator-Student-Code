@@ -3,6 +3,7 @@ package com.techelevator.hotels.services;
 import com.techelevator.hotels.model.Hotel;
 import com.techelevator.hotels.model.Reservation;
 import com.techelevator.util.BasicLogger;
+import org.apiguardian.api.API;
 import org.springframework.http.*;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientResponseException;
@@ -25,7 +26,11 @@ public class HotelService {
     public Reservation addReservation(Reservation newReservation) {
         Reservation returnedReservation = null;
 
-        //TODO: Add implementation
+        try {
+            returnedReservation = this.restTemplate.postForObject(API_BASE_URL + "reservations ", this.makeReservationEntity(newReservation), Reservation.class);
+        }catch (RestClientResponseException | ResourceAccessException e) {
+            BasicLogger.log(e.getMessage());
+        }
         BasicLogger.log("HotelService.addReservation() has not been implemented");
 
         return returnedReservation;

@@ -30,14 +30,24 @@ public class AuctionController {
 
         List<Auction> auctions = new ArrayList<>();
 
-        if (!hasTitleCriteria && !hasCurrentBidCriteria) {
-            auctions = this.dao.list();
-        } else if (hasTitleCriteria && !hasCurrentBidCriteria) {
-            auctions = this.dao.searchByTitle(title_like);
-        } else if (!hasTitleCriteria && hasCurrentBidCriteria) {
-            auctions = this.dao.searchByPrice(currentBid_lte);
-        } else if (hasTitleCriteria && hasCurrentBidCriteria) {
+//        if (!hasTitleCriteria && !hasCurrentBidCriteria) {
+//            auctions = this.dao.list();
+//        } else if (hasTitleCriteria && !hasCurrentBidCriteria) {
+//            auctions = this.dao.searchByTitle(title_like);
+//        } else if (!hasTitleCriteria && hasCurrentBidCriteria) {
+//            auctions = this.dao.searchByPrice(currentBid_lte);
+//        } else if (hasTitleCriteria && hasCurrentBidCriteria) {
+//            auctions = this.dao.searchByTitleAndPrice(title_like, currentBid_lte);
+//        }
+
+        if (hasTitleCriteria && hasCurrentBidCriteria) {
             auctions = this.dao.searchByTitleAndPrice(title_like, currentBid_lte);
+        } else if (hasCurrentBidCriteria) {
+            auctions = this.dao.searchByPrice(currentBid_lte);
+        } else if (hasTitleCriteria) {
+            auctions = this.dao.searchByTitle(title_like);
+        } else {
+            auctions = this.dao.list();
         }
 
         return auctions;
