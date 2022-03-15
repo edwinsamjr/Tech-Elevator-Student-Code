@@ -1,0 +1,27 @@
+body {
+    background-color: antiquewhite;
+}
+
+header {
+    text-align: center;
+}
+
+.img-container {
+    text-align: center;
+}
+
+img {
+    width: 300px;
+}
+
+h2 {
+    text-decoration: underline;
+}
+
+table th, td {
+    border: 1px solid;
+}
+
+blockquote {
+    font-style: italic;
+}
