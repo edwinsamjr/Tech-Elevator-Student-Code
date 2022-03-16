@@ -1,0 +1,81 @@
+html {
+    height: 100%;
+    font-size: 16px;
+}
+
+
+* {
+    /* border: 1px solid green; */
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    background-image: linear-gradient(to bottom, #858c90, #bbb);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    white-space: nowrap;
+}
+
+.trello-list {
+    display: inline-block;
+    width: 300px;
+    background-color: #ddd;
+    border-radius: 2px, 3px;
+    vertical-align: top;
+    margin-right: 10px;
+    white-space: normal;
+}
+
+div.trello-list h2 {
+    margin: 8px;
+    font-size: 1rem;
+}
+
+.trello-list ol {
+    margin: 0;
+    padding: 0;
+}
+
+.trello-list li {
+    list-style: none;
+    background-color: white;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    padding: 8px;
+    
+}
+
+.trello-list li:hover {
+    background-color: #f5f6f7;
+    color: #092d42;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.trello-list ol li:last-child {
+    margin-bottom: 0;
+}
+
+header > h1, header > p {
+    display: inline-block;
+    height: 20px;
+    padding-right: 20px;
+    border-right: 1px solid rgba(255,255,255, .5);
+    vertical-align: middle;
+}
+
+header > h1 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    height: 50px;
+}
+
+main {
+    margin-top: 50px;
+}
