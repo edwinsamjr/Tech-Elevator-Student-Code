@@ -1,0 +1,54 @@
+div.container {
+    display: grid;
+    grid-template-areas: 
+        "banner    banner    banner"
+        "links     main      events"
+        "copyright copyright copyright";
+    gap: 4px;
+    grid-template-columns: 200px 1fr 200px;
+    height: 100vh;
+}
+
+header {
+    grid-area: banner;
+}
+
+#menu-nav {
+    grid-area: links;
+}
+
+main {
+    grid-area: main;
+}
+
+#upcoming-events {
+    grid-area: events;
+    display: grid;
+    grid-template-areas: 
+        "ga-events"
+        "ga-event-items";
+}
+
+aside#upcoming-events h3 {
+    grid-area: ga-events;
+}
+
+aside#upcoming-events ul {
+    grid-area: ga-event-items;
+}
+
+footer {
+    grid-area: copyright;
+}
+
+@media only screen and (max-width: 768px) {
+    div.container {
+        grid-template-areas: 
+            "banner"
+            "links"
+            "main"
+            "events"
+            "copyright";
+        grid-template-columns: none;
+    }
+}

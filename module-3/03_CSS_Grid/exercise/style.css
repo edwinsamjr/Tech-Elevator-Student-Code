@@ -50,3 +50,156 @@ header img {
 #student-picture img{
     border-radius: 50%;
 }
+
+
+
+/* -------------------------------- */
+/* ------------GRID CSS------------ */
+/* -------------------------------- */
+
+
+#main-grid {
+    display: grid;
+    grid-template-areas: 
+        "headline     headline     picture"
+        "quote        quote        picture"
+        "profile      profile      contact"
+        "experience   experience   experience";
+    border: 1px solid red;
+    align-items: center;
+}
+
+#headline {
+    grid-area: headline;
+    border: 1px solid red;
+}
+
+#student-quote {
+    grid-area: quote;
+    border: 1px solid red;
+}
+
+#student-picture {
+    grid-area: picture;
+    justify-self: center;
+    border: 1px solid red;
+}
+
+#student-profile {
+    grid-area: profile;
+    border: 1px solid red;
+}
+
+#student-contact {
+    grid-area: contact;
+    border: 1px solid red;
+    text-align: center;
+}
+
+
+
+#experience-grid {
+    grid-area: experience;
+
+    display: grid;
+    grid-template-areas: 
+        "code         code"
+        "database     database"
+        "web          design";
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid green;
+}
+
+#experience-code {
+    grid-area: code;
+    border: 1px solid greenyellow;
+}
+
+#experience-database {
+    grid-area: database;
+    border: 1px solid greenyellow;
+}
+
+#experience-web {
+    grid-area: web;
+    border: 1px solid greenyellow;
+}
+
+#experience-design {
+    grid-area: design;
+    border: 1px solid greenyellow;
+}
+
+@media only screen and (min-width: 1024px) {
+    #main-grid {
+        grid-template-areas: 
+            "headline     headline     picture"
+            "quote        quote        picture"
+            "profile      profile      contact"
+            "experience   experience   experience";
+
+        grid-template-columns: 1fr 1fr 1fr;
+        
+        border: 1px solid blue;
+        row-gap: 20px;
+        column-gap: 50px;
+    }
+
+    #experience-grid {
+        row-gap: 20px;
+        column-gap: 50px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    #main-grid {
+        grid-template-areas: 
+            "headline     headline"
+            "quote        picture"
+            "quote        contact"
+            "profile      profile"
+            "experience   experience";
+
+        grid-template-columns: 1fr 1fr;
+
+        row-gap: 20px;
+        column-gap: 35px;
+    }
+
+    #experience-grid {
+        grid-template-areas: 
+        "code         web"
+        "database     design";
+        grid-template-columns: 1fr 1fr;
+
+        row-gap: 20px;
+        column-gap: 20px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    #main-grid {
+        grid-template-areas: 
+            "headline"
+            "picture"
+            "contact"
+            "quote"
+            "profile"
+            "experience";
+
+        grid-template-columns: 1fr;
+
+        justify-items: center;
+    }
+
+    #experience-grid {
+        grid-template-areas: 
+        "code"
+        "web"
+        "database"
+        "design";
+        grid-template-columns: 1fr;
+
+        justify-items: center;
+    }
+}
