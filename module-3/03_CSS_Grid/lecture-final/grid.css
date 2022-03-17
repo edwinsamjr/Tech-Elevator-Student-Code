@@ -1,0 +1,74 @@
+
+div.container {
+    display: grid;
+    grid-template-areas: 
+        "banner    banner    banner"
+        "links     main      events"
+        "copyright copyright copyright";
+
+    /*
+        Doesn't include header in template so header displayed
+        at the end 
+    grid-template-areas: 
+        "links     main      events"
+        "copyright copyright copyright";
+    */
+
+    /*
+      Can't have area in two separate spots
+    grid-template-areas: 
+        "links     links     banner"
+        "links     links     events"
+        "main      main      links"
+        "copyright copyright copyright";
+    */
+    gap: 10px;
+    grid-template-columns: 200px auto 200px;
+    height: 100vh;
+    align-items: center;
+    justify-content: end;
+    /* overflow: clip; */
+}
+
+header {
+    grid-area: banner;
+}
+
+#menu-nav {
+    grid-area: links;
+}
+
+main {
+    grid-area: main;
+}
+
+#upcoming-events {
+    grid-area: events;
+    display: grid;
+    grid-template-areas: 
+        "ga-events ga-event-items";
+}
+
+aside#upcoming-events h3 {
+    grid-area: ga-events;
+}
+
+aside#upcoming-events ul {
+    grid-area: ga-event-items;
+}
+
+footer {
+    grid-area: copyright;
+}
+
+@media only screen and (max-width: 768px) {
+    div.container {
+        grid-template-areas:
+            "banner"
+            "links"
+            "main"
+            "events"
+            "copyright";
+        grid-template-columns: 1fr;
+    }
+}
