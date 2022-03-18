@@ -4,6 +4,8 @@ body {
 }
 
 header {
+  display: flex;
+  flex-direction: row;
   background-color: #F0F0F0;
   padding: 20px;
 }
@@ -13,9 +15,13 @@ header {
 }
 
 ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end; 
   margin: 0;
   padding: 0;
   list-style-type: none;
+  border: 1px solid red;
 }
 
 li {
@@ -25,16 +31,22 @@ li {
   color: #707070;
   padding: 0 20px 0 0;
   margin-left: 20px;
+  border: 1px solid red;
 }
 
 a,
 a:visited {
   color: #707070;
   text-decoration: none;
+  flex-grow: 0;
 }
 
 a:hover {
   color: #00AFEF;
   text-decoration: underline;
+}
+
+nav {
+  flex-grow: 1;
 }
 
