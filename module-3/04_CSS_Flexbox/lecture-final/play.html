@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flexbox Stuff</title>
+  <style>
+    section {
+      display: flex;
+      flex-wrap: wrap;
+      /* flex-direction: column; */
+      width: 50%;
+      border: 1px solid red;
+      height: 200px;
+      /* align-items: flex-start; */
+      justify-content: space-around;
+    }
+
+    article {
+      margin: 10px;
+      background-color: blue;
+      color: white;
+      /* flex-basis: 50%; */
+      /* flex-grow: 1; */
+    }
+
+    /* #A, #D {
+      flex-grow: 2;
+    } */
+
+    /* #A {
+      flex-basis: 50%;
+    } */
+  </style>
+</head>
+<body>
+  <section>
+    <article id="A">A</article>
+    <article id="B">BB</article>
+    <article id="C">CCC</article>
+    <article id="D">DDDD</article>
+  </section>
+</body>
+</html>
