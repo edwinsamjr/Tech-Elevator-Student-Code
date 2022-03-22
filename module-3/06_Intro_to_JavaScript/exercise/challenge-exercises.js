@@ -12,6 +12,88 @@
         iqTest("2 2 4 6") → 0 // all numbers are even, therefore there is no position of an odd number
 */
 
+function iqTest(numsString){
+    const numsArray = numsString.split(' ');
+
+    if (numsArray.length < 3) {
+        return 0;
+    } else if (hasSameNumOfEvensAndOdds(numsString)) {
+        return 0;
+    } else if (hasMoreEvens(numsString)) {
+        let hasReturnedValue = false;
+        for (let i = 0; i < numsArray.length; i++) {
+            if (parseInt(numsArray[i]) % 2 == 1) {
+                return i + 1;
+            }
+        }
+        if (hasReturnedValue == false) {
+            return 0;
+        }
+
+    } else if (!hasMoreEvens(numsString)) {
+        let hasReturnedValue = false;
+        for (let i = 0; i < numsArray.length; i++) {
+            if (parseInt(numsArray[i]) % 2 == 0) {
+                return i + 1;
+            }
+        }
+
+        if (hasReturnedValue == false) {
+            return 0;
+        }
+
+    } else {
+        return 0;
+    }
+}
+
+function hasMoreEvens(numsString) {
+    let hasMoreEvens = false;
+    const numsArray = numsString.split(' ');
+
+
+    let numOdds = 0;
+    let numEvens = 0;
+
+    for(let i = 0; i < numsArray.length; i++) {
+        if (numsArray[i] % 2 == 1) {
+            numOdds++;
+        } else {
+            numEvens++;
+        }
+    }
+
+    if (numEvens > numOdds) {
+        hasMoreEvens = true;
+    }
+
+    return hasMoreEvens;
+}
+
+function hasSameNumOfEvensAndOdds(numsString) {
+    let hasSameNumOfEvensAndOdds = false;
+    const numsArray = numsString.split(' ');
+
+    let numOdds = 0;
+    let numEvens = 0;
+
+    for(let i = 0; i < numsArray.length; i++) {
+        if (numsArray[i] % 2 == 1) {
+            numOdds++;
+        } else {
+            numEvens++;
+        }
+    }
+
+    if (numEvens == numOdds) {
+        hasSameNumOfEvensAndOdds = true;
+    }
+
+    return hasSameNumOfEvensAndOdds;
+}
+
+
+
 /*
 2. **titleCase** Write a function that will convert a string into title case, given an optional 
     list of exceptions (minor words). The list of minor words will be given as a string with each 
@@ -28,3 +110,65 @@ argument is unused.
 		titleCase('THE WIND IN THE WILLOWS', 'The In') // should return: 'The Wind in the Willows'
         titleCase('the quick brown fox') // should return: 'The Quick Brown Fox'
 */
+
+
+function titleCase(title, minorWords) {
+    let result = '';
+
+    let titleWordsArray = title.split(' ');
+
+    if (minorWords == undefined) {
+        for (let i = 0; i <titleWordsArray.length; i++) {
+            let isFinalWord = i == titleWordsArray.length - 1;
+            let capitalizedWord = capitalizeWord(titleWordsArray[i]);
+
+            if (isFinalWord) {
+                result += capitalizedWord;
+            } else {
+                result += capitalizedWord + ' ';
+            }
+
+        }
+
+        return result;
+    }
+
+
+    
+    const minorWordsArray = minorWords.split(' ');
+    const minorWordsUpperCaseArray = minorWordsArray.map(string => string.toUpperCase());
+
+
+    for (let i = 0; i <titleWordsArray.length; i++) {
+        let isFirstWord = i == 0;
+        let isFinalWord = i == titleWordsArray.length - 1;
+        let isMinorWord = minorWordsUpperCaseArray.indexOf(titleWordsArray[i].toUpperCase()) != -1;
+
+        let capitalizedWord = capitalizeWord(titleWordsArray[i]);
+
+        if (isFirstWord && isFinalWord) {
+            result += capitalizedWord;
+        } else if (isFirstWord && !isFinalWord) {
+            result += capitalizedWord + ' '; 
+        } else if (isMinorWord && isFinalWord) {
+            result += titleWordsArray[i].toLowerCase();
+        } else if (isMinorWord && !isFinalWord) {
+            result += titleWordsArray[i].toLowerCase() + ' ';
+        } else if (!isMinorWord && isFinalWord) {
+            result += capitalizedWord;
+        } else if (!isMinorWord && !isFinalWord) {
+            result += capitalizedWord + ' '; 
+        }
+        
+    }
+
+    return result;
+
+}
+
+function capitalizeWord(word) {
+    let firstLetter = word.charAt(0).toUpperCase();
+    let restOfWord = word.substring(1).toLowerCase();
+
+    return firstLetter + restOfWord;
+}

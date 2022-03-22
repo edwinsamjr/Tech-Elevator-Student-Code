@@ -10,9 +10,28 @@
  */
 function variables() {
   // Declares a variable where the value cannot be changed
-  // Declares a variable those value can be changed
+  const PI = 3.14159;
+
+    // Declares a variable those value can be changed
+  let greeting = 'Hello';
+  greeting = 'Goodbye';
+  
+  console.log(`typeof greeting is ${typeof greeting}`);
+
+  greeting = 5;
+  console.log(`typeof greeting is ${typeof greeting}`);
+
+
   // Declares a variable that will always be an array
+  const PLANETS = ['Mercury'];
+  console.log(`typeof planets is ${typeof PLANETS}`);
+
+  
+
+  return "done";
 }
+
+
 
 /**
  * Functions can also accept parameters.
@@ -24,6 +43,8 @@ function printParameters(param1, param2) {
   console.log(`The value of param1 is ${param1}`);
   console.log(`The value of param2 is ${param2}`);
 }
+
+// printParameters('run', 'when read');
 
 /**
  * Compares two values x and y.
@@ -70,14 +91,34 @@ function objects() {
       "Milton Waddams",
       "Samir Nagheenanajar",
       "Michael Bolton"
-    ]
+    ],
+    address: {
+      lineOne: '123 Main St',
+      state: 'Kansas'
+    }
   };
 
   // Log the object
+  console.log(person);
+  console.table(person);
 
+  console.log(person.address.state);
+
+  console.log(`The first employee is ${person.employees[0]}`);
   // Log the first and last name
+  
 
   // Log each employee
+  console.log(`The employees are 
+  ${person.employees}`);
+
+  for (let i = 0; i < person.employees.length; i++) {
+    console.log(`Employee #${i + 1} is ${person.employees[i]}` );
+  }
+
+  for (let employee of person.employees) {
+    console.log(employee);
+  }
 }
 
 /*
