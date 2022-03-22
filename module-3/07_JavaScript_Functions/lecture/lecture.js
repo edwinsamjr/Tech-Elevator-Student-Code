@@ -28,6 +28,10 @@ function printToConsole(value) {
  * @param {number} secondParameter the second parameter to multiply
  */
 
+function multiplyTogether(firstParameter, secondParameter) {
+    return firstParameter * secondParameter;
+}
+
 /**
  * This version makes sure that no parameters are ever missing. If
  * someone calls this function without parameters, we default the
@@ -38,6 +42,10 @@ function printToConsole(value) {
  * @param {number} [firstParameter=0] the first parameter to multiply
  * @param {number} [secondParameter=0] the second parameter to multiply
  */
+
+function multiplyNoUndefined(firstParameter = 0, secondParameter = 0) {
+  return firstParameter * secondParameter;
+}
 
 
  
@@ -92,6 +100,20 @@ function createSentenceFromUser(name, age, listOfQuirks = [], separator = ', ') 
   return description + listOfQuirks.join(separator);
 }
 
+function printValue(value, index, origArray) {
+  console.log(`In printValue at index ${index} with value ${value} or array ${origArray}`);
+}
+
+function printAllValues(arrToPrint) {
+  arrToPrint.forEach(printValue);
+}
+
+function printAllValuesV2(arrToPrint) {
+  arrToPrint.forEach((value) => {
+    console.log(value)}
+  );
+}
+
 /**
  * Takes an array and, using the power of anonymous functions, generates
  * their sum.
@@ -100,7 +122,11 @@ function createSentenceFromUser(name, age, listOfQuirks = [], separator = ', ') 
  * @returns {number} sum of all the numbers
  */
 function sumAllNumbers(numbersToSum) {
-  return numbersToSum.reduce();
+  return numbersToSum.reduce((prevVal, curVal) => {
+    let newVal= prevVal + curVal;
+    console.log(`prevVal: ${prevVal} -- curVal: ${curVal} -- newVal: ${newVal} `);
+    return newVal
+  });
 }
 
 /**
@@ -111,4 +137,28 @@ function sumAllNumbers(numbersToSum) {
  * @returns {number[]} a new array with only those numbers that are
  *   multiples of 3
  */
-function allDivisibleByThree(numbersToFilter) {}
+function allDivisibleByThree(numbersToFilter) {
+  return numbersToFilter.filter((num) => {
+     return num % 3 == 0;
+    });
+}
+
+function addEvenNumbers(arrayToSum) {
+  return arrayToSum.reduce((prevVal, curVal) => {
+    if (curVal % 2 === 0) {
+      return prevVal + curVal;
+    } else {
+      return prevVal;
+    }
+  }, 0);
+}
+
+function sumAllValues() {
+  let sum = 0;
+
+  for (let param of arguments) {
+    sum += param;
+  }
+
+  return sum;
+}
