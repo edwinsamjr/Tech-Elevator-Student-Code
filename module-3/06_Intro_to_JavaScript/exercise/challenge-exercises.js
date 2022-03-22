@@ -117,7 +117,7 @@ function titleCase(title, minorWords) {
 
     let titleWordsArray = title.split(' ');
 
-    if (minorWords == undefined) {
+    if (!minorWords) {
         for (let i = 0; i <titleWordsArray.length; i++) {
             let isFinalWord = i == titleWordsArray.length - 1;
             let capitalizedWord = capitalizeWord(titleWordsArray[i]);
