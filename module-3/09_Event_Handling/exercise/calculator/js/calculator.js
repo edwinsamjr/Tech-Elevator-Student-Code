@@ -1,4 +1,4 @@
-let display;
+let display = null;
 let previous = null;
 let operator = null;
 let operatorClicked = false;
@@ -11,19 +11,19 @@ function performOperation() {
   const current = parseNumber(display.value);
   previous = parseNumber(previous);
 
-  switch(operator) {
-    case '+' :
+  switch (operator) {
+    case '+':
       result = previous + current;
-    break;
-    case '-' :
-        result = previous - current;
-    break;
-    case '*' :
-        result = previous * current;
-    break;
-    case '/' :
-        result = previous / current;
-    break;
+      break;
+    case '-':
+      result = previous - current;
+      break;
+    case '*':
+      result = previous * current;
+      break;
+    case '/':
+      result = previous / current;
+      break;
   }
 
   display.value = result;
@@ -55,7 +55,7 @@ function clickOperator(event) {
 function clickNumber(event) {
   const val = event.target.value;
 
-  if( operatorClicked ) {
+  if (operatorClicked) {
     display.value = val;
     operatorClicked = false;
   } else {
@@ -72,28 +72,62 @@ function clear() {
 }
 
 // add event listener for when the DOM is loaded
-document.addEventListener('LOADED_EVENT_GOES_HERE', () => {
+document.addEventListener('DOMContentLoaded', () => {
 
   // set the variable called display equal to the display element
   // HINT: use its id #display to get a reference to it
+  display = document.getElementById('display');
 
   // get a reference to all of the numbers
+  let numbers = document.getElementsByClassName('number');
+
   // loop over each of the numbers
   // add a click event listener to each number to call the function clickNumber
 
+  for (let i = 0; i < numbers.length; i++) {
+    numbers[i].addEventListener('click', (event) => {
+      clickNumber(event);
+    });
+  }
+
   // get a reference to the decimal point button
+  let decimal = document.getElementsByClassName('decimal');
+
   // add a click event listener to call the function clickNumber
   // the decimal point is part of the number so append it
+  decimal[0].addEventListener('click', (event) => {
+    clickNumber(event)
+  });
+
 
   // get a reference to the all clear button
-  // add a click event listener to call the function clear  
+  // add a click event listener to call the function clear
+  let clearBtns = document.getElementsByClassName('all-clear');
+  clearBtns[0].addEventListener('click', () => {
+    clear()
+  });
 
   // get a reference to all of the operators;
+  let operators = document.getElementsByClassName('operator');
+
+
   // loop over each of the operators
   // add a click event listener to each operator to call the function clickOperator
 
+  for (let i = 0; i < operators.length; i++) {
+    operators[i].addEventListener('click', (event) => {
+      clickOperator(event);
+    });
+
+  }
+
+
+
   // add click event listener for the equal sign
   // should call the function performOperation
-
+  let equalBtns = document.getElementsByClassName('equal-sign');
+  equalBtns[0].addEventListener('click', (event) => {
+    performOperation(event);
+  });
 });
 

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // let listItems = document.querySelectorAll('li');
+            let lastClick = document.getElementById('lastClick')
+            // listItems.forEach((li) => {
+            //     li.addEventListener('click', (event) => {
+            //         lastClick.innerText = li.innerText;
+            //     })
+            // })
+
+            let ol = document.querySelector('ol');
+            ol.addEventListener('click', (event) =>{
+                lastClick.innerText = event.target.innerText;
+            });
+
+            let addBtn = document.getElementById('addItem');
+            addBtn.addEventListener('click', () => {
+                let newLi = document.createElement('li');
+                newLi.innerText = 'New item';
+                document.querySelector('ol').appendChild(newLi);
+            });
+
+        })
+
+
+    </script>
+</head>
+<body>
+    <ol>
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+    </ol>
+    <button type='button' id='addItem'>Add Item</button>
+    <p>Last clicked on <span id='lastClick'></span></p>
+</body>
+</html>

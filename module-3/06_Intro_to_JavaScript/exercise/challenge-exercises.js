@@ -14,7 +14,7 @@
 
 function iqTest(numsString){
     const numsArray = numsString.split(' ');
-
+    
     if (numsArray.length < 3) {
         return 0;
     } else if (hasSameNumOfEvensAndOdds(numsString)) {
@@ -26,7 +26,7 @@ function iqTest(numsString){
                 return i + 1;
             }
         }
-        if (hasReturnedValue == false) {
+        if (!hasReturnedValue) {
             return 0;
         }
 
@@ -38,7 +38,7 @@ function iqTest(numsString){
             }
         }
 
-        if (hasReturnedValue == false) {
+        if (!hasReturnedValue) {
             return 0;
         }
 

@@ -36,3 +36,97 @@ function displayGroceries() {
     ul.appendChild(li);
   });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  setPageTitle();
+  displayGroceries();
+
+  let markCompleteBtn = document.getElementById('toggleAll');
+  markCompleteBtn.addEventListener('click', () => {toggleComplete(markCompleteBtn)});
+
+  let list = document.querySelector('ul');
+  let items = list.querySelectorAll('li');
+
+
+  items.forEach(item => {
+    item.addEventListener('click', (event) => {
+     let target = event.target;
+     let clickedOnCheckCircle = target.classList.contains('far');
+     let isCompleted = target.classList.contains('completed');
+
+     if (!clickedOnCheckCircle && !isCompleted) {
+       completeItem(target);
+       completeItem(target.querySelector('i'));
+     } else if (clickedOnCheckCircle && !isCompleted) {
+      completeItem(target);
+      completeItem(target.parentElement);
+     }
+     
+     
+
+    })
+    
+  });
+
+  items.forEach(item => {
+    item.addEventListener('dblclick', (event) => {
+     let target = event.target;
+     let clickedOnCheckCircle = target.classList.contains('far');
+     let isCompleted = target.classList.contains('completed');
+
+     if (!clickedOnCheckCircle && isCompleted) {
+      unCompleteItem(target);
+      unCompleteItem(target.querySelector('i'));
+    } else if (clickedOnCheckCircle && isCompleted) {
+     unCompleteItem(target);
+     unCompleteItem(target.parentElement);
+    }
+     
+    })
+  });
+
+
+  
+  
+});
+
+function markAllComplete() {
+  let list = document.querySelector('ul');
+  let items = list.querySelectorAll('li');
+  items.forEach((item) => {
+    completeItem(item);
+    completeItem(item.querySelector('i'));
+  });
+};
+
+function markAllIncomplete() {
+  let list = document.querySelector('ul');
+  let items = list.querySelectorAll('li');
+  items.forEach((item) => {
+    item.classList.remove('completed');
+    item.querySelector('i').classList.remove('completed');
+  });
+};
+
+function completeItem(item) {
+  item.classList.add('completed');
+  // item.querySelector('i').classList.add('completed');
+}
+
+function unCompleteItem(item) {
+  item.classList.remove('completed');
+  // item.querySelector('i').classList.remove('completed');
+}
+
+function toggleComplete(button) {
+  
+  if (allItemsIncomplete) {
+    markAllComplete();
+    button.innerText = 'Mark All Incomplete';
+    allItemsIncomplete = false;
+  } else if (!allItemsIncomplete){
+    markAllIncomplete();
+    button.innerText = 'Mark All Complete';
+    allItemsIncomplete = true;
+  }
+}
