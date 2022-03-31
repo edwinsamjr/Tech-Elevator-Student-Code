@@ -5,41 +5,68 @@
     <p class="description">{{ description }}</p>
 
     <div class="well-display">
-      <div class="well">
+      <div class="well" v-on:click="filter = 0">
         <span class="amount">{{ averageRating }}</span>
         Average Rating
       </div>
 
-      <div class="well">
+      <div class="well" v-on:click="filter = 1">
         <span class="amount">{{ numberOfOneStarReviews }}</span>
         1 Star Review{{ numberOfOneStarReviews === 1 ? '' : 's' }}
       </div>
 
-      <div class="well">
+      <div class="well" v-on:click="filter = 2">
         <span class="amount">{{ numberOfTwoStarReviews }}</span>
         2 Star Review{{ numberOfTwoStarReviews === 1 ? '' : 's' }}
       </div>
 
-      <div class="well">
+      <div class="well" v-on:click="filter = 3">
         <span class="amount">{{ numberOfThreeStarReviews }}</span>
         3 Star Review{{ numberOfThreeStarReviews === 1 ? '' : 's' }}
       </div>
 
-      <div class="well">
+      <div class="well" v-on:click="filter = 4">
         <span class="amount">{{ numberOfFourStarReviews }}</span>
         4 Star Review{{ numberOfFourStarReviews === 1 ? '' : 's' }}
       </div>
 
-      <div class="well">
+      <div class="well" v-on:click="filter = 5">
         <span class="amount">{{ numberOfFiveStarReviews }}</span>
         5 Star Review{{ numberOfFiveStarReviews === 1 ? '' : 's' }}
       </div>
     </div>
+    <a href="#" v-on:click.prevent="showForm=true" v-show="!showForm">Enter New Review</a>
+    <form v-on:submit.prevent="addNewReview" v-show="showForm">
+      <div class="form-element">
+        <label for="reviewer" v-bind:class="{error : reviewerInvalid}">Name:</label>
+        <input type="text" id="reviewer" v-model="newReview.reviewer"/>
+      </div>
+      <div class="form-element">
+        <label for="title">Title:</label>
+        <input type="text" id="title" v-model="newReview.title"/>
+      </div>
+      <div class="form-element">
+        <label for="rating">Rating:</label>
+        <select id="rating" v-model.number="newReview.rating">
+          <option value="1">1 Star</option>
+          <option value="2">2 Star</option>
+          <option value="3">3 Star</option>
+          <option value="4">4 Star</option>
+          <option value="5">5 Star</option>
+        </select>
+        <div class="form-element">
+        <label for="review">Review:</label>
+        <textarea id="review" v-model="newReview.review"/>
+      </div>
+      <input type="submit" value="Save"/>
+      <input type="button" value="Cancel" v-on:click="resetForm"/>
+      </div>
+    </form>
 
     <div
       class="review"
       v-bind:class="{ favorited: review.favorited }"
-      v-for="review in reviews"
+      v-for="review in filteredReviews"
       v-bind:key="review.id"
     >
       <h4>{{ review.reviewer }}</h4>
@@ -73,6 +100,9 @@ export default {
       description:
         "Host and plan the perfect cigar party for all of your squirrelly friends.",
       newReview: {},
+      showForm: false,
+      reviewerInvalid: false,
+      filter: 0,
       reviews: [
         {
           reviewer: "Malcolm Gladwell",
@@ -110,6 +140,15 @@ export default {
     };
   },
   computed: {
+    filteredReviews() {
+      if (this.filter === 0) {
+        return this.reviews;
+      }
+      else {
+        return this.reviews.filter(review => review.rating === this.filter)
+      }
+
+    },
     averageRating() {
       let sum = this.reviews.reduce((currentSum, review) => {
         return currentSum + review.rating;
@@ -140,6 +179,21 @@ export default {
       return this.reviews.reduce((currentCount, review) => {
         return currentCount + (review.rating === 5);
       }, 0);
+    }
+  },
+  methods: {
+    addNewReview() {
+      if (this.newReview.reviewer == undefined || this.newReview.reviewer.length.trim === 0) {
+        this.reviewerInvalid = true;
+        return;
+      }
+      this.reviews.unshift(this.newReview);
+      this.newReview = {}; 
+      this.showForm = false;   
+    },
+    resetForm() {
+      this.newReview = {};
+      this.showForm = false;
     }
   }
 };
@@ -224,6 +278,9 @@ form > input[type=button] {
 form > input[type=submit] {
   width: 100px;
   margin-right: 10px;
+}
+.error{
+  color:red;
 }
 </style>
 

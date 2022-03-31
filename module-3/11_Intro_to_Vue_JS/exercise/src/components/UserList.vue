@@ -11,12 +11,12 @@
     </thead>
     <tbody>
       <tr>
-        <td><input type="text" id="firstNameFilter"/></td>
-        <td><input type="text" id="lastNameFilter"/></td>
-        <td><input type="text" id="usernameFilter"/></td>
-        <td><input type="text" id="emailFilter"/></td>
+        <td><input type="text" id="firstNameFilter" v-model="filter.firstName"/></td>
+        <td><input type="text" id="lastNameFilter" v-model="filter.lastName"/></td>
+        <td><input type="text" id="usernameFilter" v-model="filter.username"/></td>
+        <td><input type="text" id="emailFilter" v-model="filter.emailAddress"/></td>
         <td>
-          <select id="statusFilter">
+          <select id="statusFilter" v-model="filter.status">
             <option value="">Show All</option>
             <option value="Active">Active</option>
             <option value="Disabled">Disabled</option>
@@ -24,6 +24,13 @@
         </td>
       </tr>
       <!-- user listing goes here -->
+      <tr v-for="user in filteredList" v-bind:key="user.username" v-bind:class= "{'disabled' : user.status === 'Disabled'}">
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.emailAddress}}</td>
+        <td>{{user.status}}</td>
+      </tr>
     </tbody>
   </table>
 </template>
@@ -40,7 +47,45 @@ export default {
         { firstName: 'Ben', lastName: 'Carter', username: 'bcarter', emailAddress: 'bcarter@gmail.com', status: 'Active' },
         { firstName: 'Katie', lastName: 'Jackson', username: 'kjackson', emailAddress: 'kjackson@yahoo.com', status: 'Active' },
         { firstName: 'Mark', lastName: 'Smith', username: 'msmith', emailAddress: 'msmith@foo.com', status: 'Disabled' }
-      ]
+      ],
+      filter: {
+        firstName: '', lastName: '', username: '', emailAddress: '', status: ''
+      }
+    }
+  },
+  computed: {
+    filteredList() {
+        return  this.users.filter((user) => {
+          return this.filterFirstName(user) &&
+                 this.filterLastName(user) &&
+                 this.filterUsername(user) &&
+                 this.filterEmailAddress(user) &&
+                 this.filterStatus(user);
+        })
+      
+    }
+  },
+  methods: {
+    filterFirstName(user) {
+      return user.firstName.toLowerCase().includes(this.filter.firstName.toLowerCase());
+    },
+    filterLastName(user) {
+      return user.lastName.toLowerCase().includes(this.filter.lastName.toLowerCase());
+    },
+    filterUsername(user) {
+      return user.username.toLowerCase().includes(this.filter.username.toLowerCase());
+    },
+    filterEmailAddress(user) {
+      return user.emailAddress.toLowerCase().includes(this.filter.emailAddress.toLowerCase());
+    },
+    filterStatus(user) {
+      if (this.filter.status === '') {
+        return true;
+      } else if (this.filter.status === 'Active') {
+        return user.status === 'Active';
+      } else if (this.filter.status === 'Disabled') {
+        return user.status === 'Disabled';
+      }
     }
   }
 }
