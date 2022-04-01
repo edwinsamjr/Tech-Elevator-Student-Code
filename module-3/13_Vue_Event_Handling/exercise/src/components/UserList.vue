@@ -52,7 +52,8 @@
           <td>{{ user.emailAddress }}</td>
           <td>{{ user.status }}</td>
           <td>
-            <button class="btnEnableDisable" v-on:click="flipStatus(user.id)">{{ user.status === 'Disabled' ? 'Enable' : 'Disable' }}</button>
+            <button class="btnEnableDisable" v-on:click="flipStatus(user.id)">{{buttonText(user)}}</button>
+            <!-- <button class="btnEnableDisable" v-on:click="flipStatus(user.id)">{{ user.status === 'Disabled' ? 'Enable' : 'Disable' }}</button> -->
             <!-- I tried creating two buttons (Enable and Disable) and using v-show to display only one, but the tests wouldn't pass -->
           </td>
         </tr>
@@ -229,6 +230,13 @@ export default {
       }
 
       
+    },
+    buttonText(user) {
+      if (user.status === 'Active') {
+        return 'Disable';
+      } else {
+      return "Enable";
+      }
     }
 
   },
@@ -277,6 +285,7 @@ export default {
         return false;
       }
     }
+
   }
 };
 </script>

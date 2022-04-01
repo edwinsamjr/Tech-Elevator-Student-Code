@@ -10,6 +10,7 @@ export default new Vuex.Store({
     filter: 0,
     reviews: [
       {
+        id: 1,
         reviewer: 'Malcolm Gladwell',
         title: 'What a book!',
         review:
@@ -18,6 +19,7 @@ export default new Vuex.Store({
         favorited: false
       },
       {
+        id: 2,
         reviewer: 'Tim Ferriss',
         title: 'Had a cigar party started in less than 4 hours.',
         review:
@@ -26,6 +28,7 @@ export default new Vuex.Store({
         favorited: false
       },
       {
+        id: 3,
         reviewer: 'Ramit Sethi',
         title: 'What every new entrepreneurs needs. A door stop.',
         review:
@@ -34,6 +37,7 @@ export default new Vuex.Store({
         favorited: false
       },
       {
+        id: 4,
         reviewer: 'Gary Vaynerchuk',
         title: 'And I thought I could write',
         review:
@@ -45,7 +49,25 @@ export default new Vuex.Store({
   },
   mutations: {
     ADD_REVIEW(state, review) {
+      let maxNum = state.reviews.reduce((largestFound, curReview) => {
+        return Math.max(largestFound, curReview.id);
+      }, 0);
+      review.id = maxNum + 1
       state.reviews.unshift(review);
+    },
+    DELETE_REVIEW(state, id) {
+    //   let reviewsToKeep = [];
+    //   state.reviews.filter((review) => {
+    //     return review.id != id;
+    //   })
+    //   state.reviews = reviewsToKeep;
+      let reviewsToKeep = [];
+      state.reviews.forEach((review) => {
+        if (review.id != id) {
+          reviewsToKeep.push(review);
+        }
+      })
+      state.reviews = reviewsToKeep;
     },
     UPDATE_FILTER(state, filter) {
       state.filter = filter;
