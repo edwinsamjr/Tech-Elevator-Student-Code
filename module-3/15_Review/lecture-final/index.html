@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            let listItems = document.querySelectorAll('li');
+            
+            for (let listItem of listItems) {
+                listItem.addEventListener('click', (event) => {
+                    console.log(`In li click handler for element ${event.target.nodeName}`);
+                    listItem.parentElement.insertAdjacentElement('afterbegin', listItem);
+                });
+            }
+
+            document.querySelector('ol').addEventListener('click', (event) => {
+                console.log(`In ol click event for element ${event.target.nodeName}`);
+            });
+
+            document.querySelector('body').addEventListener('click', (event) => {
+                console.log(`In body click event for element ${event.target.nodeName}`);
+            });
+        });
+    </script>
+
+    <style>
+        * {
+            margin: 20px;
+            border: 1px solid blue; 
+        }
+    </style>
+</head>
+<body>
+    <ol>
+        <!-- Insert here -->
+        <li>Mercury</li>
+        <li>Venus</li>
+        <li>Earth</li>
+        <li>Mars</li>
+        <li>Gas Giants</li>
+    </ol>
+</body>
+</html>
