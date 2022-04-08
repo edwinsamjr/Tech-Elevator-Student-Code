@@ -67,7 +67,13 @@ export default {
         });
     },
     deleteBoard() {
-      
+      if (confirm('Are you sure?')) {
+        boardsService.deleteBoard(this.boardId).then(() => {
+          alert('Board successfully deleted');
+          this.$store.commit('DELETE_BOARD', this.boardId);
+          this.$router.push(`/board/${this.$store.state.boards[0].id}`);
+        });
+      }
     }
   },
   created() {

@@ -17,8 +17,12 @@ export default {
   getCard(boardID, cardID) {
     return http.get(`/boards/${boardID}`).then((response) => {
       const cards = response.data.cards;
-      return cards.find(card => card.id == cardID);
-    })
+      // return cards.find(card => card.id == cardID);
+
+      const card = cards.find(card => card.id == cardID);
+      console.log(`Found card ${card}`);
+      return card;
+    });
   }
 
 }

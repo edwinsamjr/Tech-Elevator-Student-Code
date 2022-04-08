@@ -24,7 +24,8 @@ Implement navigation in a `<nav>` element at the top of the `App` component. The
 
 After you complete this step, all tests under "Step Three Tests" pass.
 
-![Top Navigation in App](./etc/top-navigation.png)
+![Top Navigation in App](./etc/top-navigati
+on.png)
 
 ## Step Four: Display the book form
 
